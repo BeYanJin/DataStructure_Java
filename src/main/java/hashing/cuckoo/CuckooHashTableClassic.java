@@ -72,7 +72,7 @@ public class CuckooHashTableClassic<T> {
      * @return 包含返回true, 否则返回 false
      */
     public boolean contains(T x) {
-
+        return findPos(x) != -1;
     }
     /**
      * 增加（插入）元素
@@ -109,9 +109,11 @@ public class CuckooHashTableClassic<T> {
         }
 
         if( rehashes++ >= ALLOWED_REHASHES ) {
+            // 使表更大
             expand( );
             rehashes = 0;
         } else {
+            // 同样的表长, 但使用新的hash函数
             rehash();
         }
         return insert( x );
@@ -122,9 +124,46 @@ public class CuckooHashTableClassic<T> {
      * @return 删除成功返回true, 否则（元素不存在于表中）返回 false
      */
     public boolean remove(T x) {
+        int pos = findPos(x);
 
+        if(pos != -1) {
+            array[pos] = null;
+            currentSize--;
+        }
+
+        return pos != -1;
     }
 
+    /**
+     * 散列函数
+     * @param x 要进行hash计算的元素
+     * @param which 指定执行散列函数集合中的哪一个特定的散列函数
+     */
+    protected int myhash( T x, int which ) {
+        int hashVal = hashFunctions.hash( x, which );
+
+        hashVal %= subTableSize;
+        if( hashVal < 0 ) {
+            hashVal += subTableSize;
+        }
+
+        return hashVal + subTableStarts[ which ];
+    }
+
+    /**
+     * 找到元素并返回下标
+     * @param x 要寻找的元素
+     * @return 搜到的索引位置, 如果找不到返回 -1
+     */
+    private int findPos(T x) {
+        for(int i = 0; i < numHashFunctions; i++) {
+            int pos = myhash(x, i);
+            if(array[pos] != null && array[pos].equals(x)) {
+                return pos;
+            }
+        }
+        return -1;
+    }
     /**
      * 创建一个更大的数组, 但是保持用同样的散列函数
      */

@@ -13,9 +13,9 @@ public class BinaryHeapTest {
         binaryHeap.print();
 
         binaryHeap.insert(5);
-        Assert.assertEquals((long)5, (long)binaryHeap.findMin());
+        Assert.assertEquals(5, (int)binaryHeap.findMin());
 
         binaryHeap.deleteMin();
-        Assert.assertEquals((long)10, (long)binaryHeap.findMin());
+        Assert.assertEquals(10, (int)binaryHeap.findMin());
     }
 }

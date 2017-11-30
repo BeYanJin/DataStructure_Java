@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Comparator;
 
 /**
- * 二叉查找/排序树（BST）
+ * 二叉查找/排序树（BinarySearchTree）
  * @author 谈裕锦
  * 时间复杂度：
  * 索引：O(logN)
@@ -14,17 +14,17 @@ import java.util.Comparator;
  * 存在问题：交替插入和删除O(N^2)次，右沉的树将明显地不平衡
  * 解决方法；找到一种使树不管插入删除多少次都能保持平衡的算法
  */
-public class BST<T extends Comparable<? super T>> {
+public class BinarySearchTree<T extends Comparable<? super T>> {
 
 	// 根节点
 	private BinaryNode<T> root;
 	// 自定义外部比较器
 	private Comparator<? super T> cmp;
 	
-	public BST() {
+	public BinarySearchTree() {
 		this(null);
 	}
-	public BST(Comparator<? super T> cmp) {
+	public BinarySearchTree(Comparator<? super T> cmp) {
 		this.root = null;
 		this.cmp = cmp;
 	}

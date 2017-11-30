@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Comparator;
 
 /**
- * 平衡二叉树（AVL）
+ * 平衡二叉树（AvlTree）
  * @author 谈裕锦
  * 时间复杂度：
  * 索引：O(logN)
@@ -12,7 +12,7 @@ import java.util.Comparator;
  * 查找：O(logN)
  * 删除：O(logN)
  */
-public class AVL<T extends Comparable<? super T>> {
+public class AvlTree<T extends Comparable<? super T>> {
 
 	// 根节点
 	private AvlNode<T> root;
@@ -21,10 +21,10 @@ public class AVL<T extends Comparable<? super T>> {
 	// 最大允许左右子树的高度差
 	private static final int ALLOWED_IMBALANCE = 1;
 	
-	public AVL() {
+	public AvlTree() {
 		this(null);
 	}
-	public AVL(Comparator<? super T> cmp) {
+	public AvlTree(Comparator<? super T> cmp) {
 		this.root = null;
 		this.cmp = cmp;
 	}

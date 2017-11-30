@@ -1,6 +1,6 @@
 package sort;
 
-public class SortUtil  {
+public class Sort {
     
     /**
      * 插入排序
@@ -8,7 +8,7 @@ public class SortUtil  {
      * @param a
      * @param <T>
      */
-    public <T extends Comparable<? super T>> void insertionSort(T[] a) {
+    public static <T extends Comparable<? super T>> void insertionSort(T[] a) {
         int j;
         for(int p = 1; p < a.length; p++) {
             T tmp = a[p];
@@ -25,7 +25,7 @@ public class SortUtil  {
      * @param a
      * @param <T>
      */
-    public <T extends Comparable<? super T>> void shellSort(T[] a) {
+    public static <T extends Comparable<? super T>> void shellSort(T[] a) {
         int j;
 
         final int k = (int)(Math.log(a.length + 1) / Math.log(2));

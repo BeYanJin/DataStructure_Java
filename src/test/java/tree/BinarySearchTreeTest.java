@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BSTTest {
+public class BinarySearchTreeTest {
 	@BeforeClass
 	public static void setupBeforeClass() {}
 	
@@ -19,7 +19,7 @@ public class BSTTest {
 	
 	@Test
 	public void testBST() {
-		BST<Integer> bst = new BST<Integer>();
+		BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();
 		List<Integer> list = new ArrayList<Integer>();
 		final int MIN_UNIT = 1;
 		// 二叉查找树不会自动平衡，故插入有序序列时相当于一个链表，MAX_UNIT很大，运行时间也会很大，若MAX_UNIT太大，会导致栈溢出错误（函数递归引起）, 此时需要AVL

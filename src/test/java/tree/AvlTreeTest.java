@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class AVLTest {
+public class AvlTreeTest {
 	@BeforeClass
 	public static void setupBeforeClass() {}
 	
@@ -19,7 +19,7 @@ public class AVLTest {
 	
 	@Test
 	public void testAVL() {
-		AVL<Integer> avl = new AVL<Integer>();
+		AvlTree<Integer> avl = new AvlTree<Integer>();
 		List<Integer> list = new LinkedList<Integer>();
 		final int MIN_UNIT = 1;
 		// 二叉平衡树会自适应平衡，即使插入的是有序列表，MAX_UNIT很大时，其效率还是会很乐观的, 但MAX_UNIT太大，会引起内存溢出错误（内存空间存储量不够引起）, 此时需要B+树

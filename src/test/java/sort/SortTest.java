@@ -1,15 +1,14 @@
 package sort;
 
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
-import sort.SortUtil;
+import org.junit.Test;
 
-public class SortUtilTest {
+public class SortTest {
     @Test
     public void testInsertionSort() {
         Integer[] array = new Integer[]{34, 8, 64, 51 ,32 ,21};
         Integer[] result = new Integer[]{8, 21, 32, 34, 51, 64};
-        SortUtil.insertionSort(array);
+        Sort.insertionSort(array);
         Assert.assertArrayEquals(result, array);
     }
 
@@ -17,7 +16,7 @@ public class SortUtilTest {
     public void testShellSort() {
         Integer[] array = new Integer[]{34, 8, 64, 51 ,32 ,21};
         Integer[] result = new Integer[]{8, 21, 32, 34, 51, 64};
-        SortUtil.shellSort(array);
+        Sort.shellSort(array);
         Assert.assertArrayEquals(result, array);
     }
 }

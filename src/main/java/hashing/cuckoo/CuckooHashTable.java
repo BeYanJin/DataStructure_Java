@@ -1,5 +1,7 @@
 package hashing.cuckoo;
 
+import hashing.cuckoo.family.HashFamily;
+
 import java.util.Random;
 
 public class CuckooHashTable<T> {

@@ -1,4 +1,4 @@
-package hashing.cuckoo;
+package hashing.cuckoo.family;
 
 import java.util.Random;
 

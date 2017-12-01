@@ -1,5 +1,7 @@
 package hashing.cuckoo;
 
+import hashing.cuckoo.family.HashFamily;
+
 public class CuckooHashTableClassic<T> {
     private static final double MAX_LOAD = 0.49;        // 表的最大负载（装填因子）
     private static final int ALLOWED_REHASHES = 100;    // 指定插入冲突时我们最多能执行多少次再散列

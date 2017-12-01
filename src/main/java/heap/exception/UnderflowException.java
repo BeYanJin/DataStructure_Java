@@ -1,4 +1,4 @@
-package heap;
+package heap.exception;
 
 /**
  * 访问空的容器时, 抛出此异常

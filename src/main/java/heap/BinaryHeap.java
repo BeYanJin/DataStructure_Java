@@ -1,5 +1,7 @@
 package heap;
 
+import heap.exception.UnderflowException;
+
 /**
  * insert(x) --- 插入 --- 平均时间 O(1) --- 最坏情形时间 O(logN)
  * deleteMin() --- 删除最小元 --- 平均时间 O(logN) --- 最坏情形时间 O(logN)
@@ -39,11 +41,36 @@ public class BinaryHeap<T extends Comparable<? super T>> {
      * 按顺序遍历完全二叉树
      */
     public void print() {
-        for(T item: array) {
-            if(item != null) {
-                System.out.print(item + " ");
-            }
+        for(int i = 1; i <= currentSize; i++) {
+            System.out.print(array[i] + " ");
         }
+    }
+    /**
+     * 获取散列表中的元素总个数
+     * @return 散列表中的元素总个数
+     */
+    public int size() {
+        return currentSize;
+    }
+    /**
+     * 获取当前散列表的长度
+     * @return 当前散列表的长度
+     */
+    public int capacity( ) {
+        return array.length;
+    }
+    /**
+     * 判断优先队列是否为空
+     * @return 空返回true, 否则返回false
+     */
+    public boolean isEmpty() {
+        return currentSize == 0;
+    }
+    /**
+     * 使优先队列在逻辑上变为空
+     */
+    public void makeEmpty() {
+        currentSize = 0;
     }
     /**
      * 将一个元素x插入到堆中
@@ -80,26 +107,38 @@ public class BinaryHeap<T extends Comparable<? super T>> {
         if(isEmpty()) {
             throw new UnderflowException();
         }
-
-        // 将最后一个元素放入根节点的空穴
-        array[1] = array[currentSize--];
+        array[1] = array[currentSize--];    // 将最后一个元素放入根节点的空穴
         percolateDown(1);
 
-        // 返回最小元（根节点元素）
-        return findMin();
+        return findMin();   // 返回最小元（根节点元素）
     }
     /**
-     * 判断优先队列是否为空
-     * @return 空返回true, 否则返回false
+     * 改变关键字的值
+     * @param p 位置坐标
+     * @param value 不等于null, 则给位置p的关键字赋予对应值;等于null, 则直接返回
      */
-    public boolean isEmpty() {
-        return currentSize == 0;
+    public void changeKey(int p, T value) {
+        if(p < 1 && p > currentSize) {
+            throw new UnderflowException();
+        }
+        if(value == null) {
+            return;
+        }
+        if(array[p].compareTo(value) > 0) {
+            array[p] = value;
+            percolateUp(p);
+        } else {
+            array[p] = value;
+            percolateDown(p);
+        }
     }
     /**
-     * 使优先队列在逻辑上变为空
+     * 删除指定元素
+     * @param p 位置坐标
      */
-    public void makeEmpty() {
-        currentSize = 0;
+    public void delete(int p) {
+        changeKey(p, findMin());
+        deleteMin();
     }
 
     /**
@@ -110,7 +149,7 @@ public class BinaryHeap<T extends Comparable<? super T>> {
         T tmp = array[hole];
 
         for(array[0] = tmp; tmp.compareTo(array[hole/2]) < 0; hole /= 2) {
-            // 如果元素小于其父节点, 则父节点下移, 元素上滤
+            // 如果元素 <= 其父节点, 则父节点下移, 元素上滤
             array[hole] = array[hole/2];
         }
         array[hole] = tmp;
@@ -133,7 +172,7 @@ public class BinaryHeap<T extends Comparable<? super T>> {
                 child++;
             }
 
-            // 比较下滤元素和其最小的儿子节点, 若下滤元素大于其最小的儿子节点, 则将该儿子节点上移
+            // 比较下滤元素和其最小的儿子节点, 若下滤元素 >= 其最小的儿子节点, 则将该儿子节点上移
             if(array[child].compareTo((tmp)) < 0) {
                 array[hole] = array[child];
             } else {

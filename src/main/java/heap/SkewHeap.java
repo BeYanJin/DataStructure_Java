@@ -2,14 +2,19 @@ package heap;
 
 import heap.exception.UnderflowException;
 
-public class LeftistHeap<T extends Comparable<? super T>> {
+/**
+ * 也叫自适应堆, 是一种自适应的左偏树（左式堆）, 优势是其合并的速度远远大于二叉堆
+ * 最坏情形运行时间 --- O(N)
+ * 对任意M次连续操作, 总的最坏情形时间是O(MlogN), 故：
+ * 摊还开销 --- O(logN)
+ */
+public class SkewHeap<T extends Comparable<? super T>> {
     private Node<T> root;   // 根节点
 
     private static class Node<T> {      // 节点内部类
         T element;      // 节点元素
         Node<T> left;   // 左节点
         Node<T> right;  // 右节点
-        int npl;        // 零路径长
         Node(T theElement) {            // 构造器
             this(theElement, null, null);
         }
@@ -17,14 +22,13 @@ public class LeftistHeap<T extends Comparable<? super T>> {
             element = theElement;
             left = lt;
             right = rt;
-            npl = 0;
         }
     }
 
-    public LeftistHeap() {  // 构造左式堆
+    public SkewHeap() {  // 构造斜堆
         root = null;
     }
-    public LeftistHeap(T[] items) {  // 构造左式堆
+    public SkewHeap(T[] items) {  // 构造斜堆
         buildHeap(items);
     }
 
@@ -72,7 +76,7 @@ public class LeftistHeap<T extends Comparable<? super T>> {
     /**
      * 合并两个堆
      */
-    public void merge(LeftistHeap<T> rhs) {
+    public void merge(SkewHeap<T> rhs) {
         // 避免混叠问题
         if(this == rhs) {
             return;
@@ -106,10 +110,9 @@ public class LeftistHeap<T extends Comparable<? super T>> {
             h1.left = h2;
         } else {
             h1.right = merge(h1.right, h2);
-            if(h1.left.npl < h1.right.npl) {
+            if(h1.left != null && h1.right != null) {
                 swapChildren(h1);
             }
-            h1.npl = h1.right.npl + 1;
         }
         return h1;
     }

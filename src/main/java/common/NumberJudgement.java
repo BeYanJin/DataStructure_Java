@@ -18,11 +18,10 @@ public class NumberJudgement {
      * @param n
      */
     public static int nextPrime( int n ) {
-        if( n % 2 == 0 )
+        if( n % 2 == 0 ) {
             n++;
-
-        // 从奇数中找到最近的一个素数
-        for( ; !isPrime( n ); n += 2 );
+        }
+        for( ; !isPrime( n ); n += 2 ); // 从奇数中找到最近的一个素数
 
         return n;
     }
@@ -31,17 +30,17 @@ public class NumberJudgement {
      * @param n
      */
     public static boolean isPrime( int n ) {
-        if( n == 2 || n == 3 )
+        if( n == 2 || n == 3 ) {
             return true;
-
-        if( n == 1 || n % 2 == 0 )
+        }
+        if( n == 1 || n % 2 == 0 ) {
             return false;
-
-        // 到sqrt(n)止
-        for( int i = 3; i * i <= n; i += 2 )
-            if( n % i == 0 )
+        }
+        for( int i = 3; i * i <= n; i += 2 ) {  // 到sqrt(n)止
+            if (n % i == 0) {
                 return false;
-
+            }
+        }
         return true;
     }
 }

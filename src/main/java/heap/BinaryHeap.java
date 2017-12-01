@@ -9,13 +9,9 @@ package heap;
  * delete(p) --- 删除
  */
 public class BinaryHeap<T extends Comparable<? super T>> {
-    // 二叉堆的初始化大小
-    private static final int DEFAULT_CAPACITY = 10;
-
-    // 二叉堆的总元素个数
-    private int currentSize;
-    // 二叉堆数组
-    private T[] array;
+    private static final int DEFAULT_CAPACITY = 10; // 二叉堆的初始化大小
+    private int currentSize;    // 二叉堆的总元素个数
+    private T[] array;          // 二叉堆数组
 
     /**
      * 构建二叉堆
@@ -137,9 +133,8 @@ public class BinaryHeap<T extends Comparable<? super T>> {
                 child++;
             }
 
-            // 比较下滤元素和其最小的儿子节点
+            // 比较下滤元素和其最小的儿子节点, 若下滤元素大于其最小的儿子节点, 则将该儿子节点上移
             if(array[child].compareTo((tmp)) < 0) {
-                // 若下滤元素大于其最小的儿子节点, 则将该儿子节点上移
                 array[hole] = array[child];
             } else {
                break;

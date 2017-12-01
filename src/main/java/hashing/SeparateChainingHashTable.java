@@ -4,12 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class SeparateChainingHashTable<T> {
-    // 散列表的大小, 该值最好为素数
-    private static final int DEFAULT_TABLE_SIZE = 10;
-    // 链表数组, 数组下标为散列表的关键字 Key
-    private List<T>[] theLists;
-    // 节点总个数
-    private int currentSize;
+    private static final int DEFAULT_TABLE_SIZE = 10;   // 散列表的大小, 该值最好为素数
+    private List<T>[] theLists;     // 链表数组, 数组下标为散列表的关键字 Key
+    private int currentSize;        // 节点总个数
 
     /**
      * 构建散列表
@@ -87,8 +84,7 @@ public class SeparateChainingHashTable<T> {
     private void rehash() {
         List<T>[] oldLists = theLists;
 
-        // 创建两倍长度的散列表
-        theLists = new List[nextPrime(2 * theLists.length)];
+        theLists = new List[nextPrime(2 * theLists.length)];    // 创建两倍长度的散列表
         for(int j = 0; j < theLists.length; j++) {
             theLists[j] = new LinkedList<>();
         }
@@ -120,11 +116,10 @@ public class SeparateChainingHashTable<T> {
      * @param n
      */
     private static int nextPrime( int n ) {
-        if( n % 2 == 0 )
+        if( n % 2 == 0 ) {
             n++;
-
-        // 从奇数中找到最近的一个素数
-        for( ; !isPrime( n ); n += 2 );
+        }
+        for( ; !isPrime( n ); n += 2 ); // 从奇数中找到最近的一个素数
 
         return n;
     }
@@ -133,17 +128,17 @@ public class SeparateChainingHashTable<T> {
      * @param n
      */
     private static boolean isPrime( int n ) {
-        if( n == 2 || n == 3 )
+        if( n == 2 || n == 3 ) {
             return true;
-
-        if( n == 1 || n % 2 == 0 )
+        }
+        if( n == 1 || n % 2 == 0 ) {
             return false;
-
-        // 到sqrt(n)止
-        for( int i = 3; i * i <= n; i += 2 )
-            if( n % i == 0 )
+        }
+        for( int i = 3; i * i <= n; i += 2 ) {  // 到sqrt(n)止
+            if (n % i == 0) {
                 return false;
-
+            }
+        }
         return true;
     }
 }

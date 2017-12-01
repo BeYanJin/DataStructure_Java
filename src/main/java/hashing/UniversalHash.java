@@ -2,8 +2,7 @@ package hashing;
 
 public class UniversalHash {
     private static final int DIGS = 31;
-    // 梅森素数, 相当于 2^31 - 1
-    private static final int mersennep = (1 << DIGS) - 1;
+    private static final int mersennep = (1 << DIGS) - 1;   // 梅森素数, 相当于 2^31 - 1
 
     /**
      * 通用散列函数（卡特-韦格曼绝招）
@@ -15,8 +14,7 @@ public class UniversalHash {
     public static int universalHash(int x, int A, int B, int M) {
         long hashVal = (long)A * x + B;
 
-        // 取模运算 用 位移运算 和 一次加法 来完成
-        hashVal = ((hashVal >> DIGS) + (hashVal & mersennep));
+        hashVal = ((hashVal >> DIGS) + (hashVal & mersennep));  // 取模运算 用 位移运算 和 一次加法 来完成
         if(hashVal >= mersennep) {
             hashVal -= mersennep;
         }

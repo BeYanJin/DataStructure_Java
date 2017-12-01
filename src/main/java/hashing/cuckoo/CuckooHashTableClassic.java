@@ -1,26 +1,19 @@
 package hashing.cuckoo;
 
 public class CuckooHashTableClassic<T> {
-    // 表的最大负载（装填因子）
-    private static final double MAX_LOAD = 0.49;
-    // 指定插入冲突时我们最多能执行多少次再散列
-    private static final int ALLOWED_REHASHES = 100;
-    // 散列表初始化长度h
-    private static final int DEFAULT_TABLE_SIZE = 101;
+    private static final double MAX_LOAD = 0.49;        // 表的最大负载（装填因子）
+    private static final int ALLOWED_REHASHES = 100;    // 指定插入冲突时我们最多能执行多少次再散列
+    private static final int DEFAULT_TABLE_SIZE = 101;  // 散列表初始化长度h
 
-    // 散列函数集
-    private final HashFamily<? super T> hashFunctions;
-    // 散列函数的个数
-    private final int numHashFunctions;
-    // The array of elements
-    private T[] array;
+    private final HashFamily<? super T> hashFunctions;  // 散列函数集
+    private final int numHashFunctions;                 // 散列函数的个数
+    private T[] array;                                  // The array of elements
     private int currentSize;
 
     private int subTableSize;
     private int[] subTableStarts;
 
-    // 跟踪已经为这次插入尝试了多少次再散列
-    private int rehashes = 0;
+    private int rehashes = 0;       // 跟踪已经为这次插入尝试了多少次再散列
 
     /**
      * 构建散列表
@@ -109,12 +102,10 @@ public class CuckooHashTableClassic<T> {
         }
 
         if( rehashes++ >= ALLOWED_REHASHES ) {
-            // 使表更大
-            expand( );
+            expand( );  // 使表更大
             rehashes = 0;
         } else {
-            // 同样的表长, 但使用新的hash函数
-            rehash();
+            rehash();   // 同样的表长, 但使用新的hash函数
         }
         return insert( x );
     }
@@ -174,7 +165,6 @@ public class CuckooHashTableClassic<T> {
      * 保持数组规模不变, 但创建一个新的数组, 用新选的散列函数去填充
      */
     private void rehash() {
-        //System.out.println( "NEW HASH FUNCTIONS " + array.length );
         hashFunctions.generateNewFunctions( );
         rehash( array.length );
     }
@@ -225,11 +215,10 @@ public class CuckooHashTableClassic<T> {
      * @param n
      */
     private static int nextPrime( int n ) {
-        if( n % 2 == 0 )
+        if (n % 2 == 0) {
             n++;
-
-        // 从奇数中找到最近的一个素数
-        for( ; !isPrime( n ); n += 2 );
+        }
+        for( ; !isPrime( n ); n += 2 ); // 从奇数中找到最近的一个素数
 
         return n;
     }
@@ -238,17 +227,17 @@ public class CuckooHashTableClassic<T> {
      * @param n
      */
     private static boolean isPrime( int n ) {
-        if( n == 2 || n == 3 )
+        if( n == 2 || n == 3 ) {
             return true;
-
-        if( n == 1 || n % 2 == 0 )
+        }
+        if( n == 1 || n % 2 == 0 ) {
             return false;
-
-        // 到sqrt(n)止
-        for( int i = 3; i * i <= n; i += 2 )
-            if( n % i == 0 )
+        }
+        for( int i = 3; i * i <= n; i += 2 ) {  // 到sqrt(n)止
+            if (n % i == 0) {
                 return false;
-
+            }
+        }
         return true;
     }
 }

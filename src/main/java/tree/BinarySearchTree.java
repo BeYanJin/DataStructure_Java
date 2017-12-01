@@ -15,11 +15,8 @@ import java.util.Comparator;
  * 解决方法；找到一种使树不管插入删除多少次都能保持平衡的算法
  */
 public class BinarySearchTree<T extends Comparable<? super T>> {
-
-	// 根节点
-	private BinaryNode<T> root;
-	// 自定义外部比较器
-	private Comparator<? super T> cmp;
+	private BinaryNode<T> root;			// 根节点
+	private Comparator<? super T> cmp;	// 自定义外部比较器
 	
 	public BinarySearchTree() {
 		this(null);
@@ -28,9 +25,8 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
 		this.root = null;
 		this.cmp = cmp;
 	}
-	
-	// 节点内部类
-	private static class BinaryNode<T> {
+
+	private static class BinaryNode<T> {	// 节点内部类
 		T element;
 		BinaryNode<T> left;
 		BinaryNode<T> right;		

@@ -13,13 +13,9 @@ import java.util.Comparator;
  * 删除：O(logN)
  */
 public class AvlTree<T extends Comparable<? super T>> {
-
-	// 根节点
-	private AvlNode<T> root;
-	// 自定义外部比较器
-	private Comparator<? super T> cmp;
-	// 最大允许左右子树的高度差
-	private static final int ALLOWED_IMBALANCE = 1;
+	private AvlNode<T> root;	// 根节点
+	private Comparator<? super T> cmp;		// 自定义外部比较器
+	private static final int ALLOWED_IMBALANCE = 1;	// 最大允许左右子树的高度差
 	
 	public AvlTree() {
 		this(null);
@@ -28,9 +24,8 @@ public class AvlTree<T extends Comparable<? super T>> {
 		this.root = null;
 		this.cmp = cmp;
 	}
-	
-	// 节点内部类
-	private static class AvlNode<T> {
+
+	private static class AvlNode<T> {	// 节点内部类
 		T element;
 		AvlNode<T> left;
 		AvlNode<T> right;

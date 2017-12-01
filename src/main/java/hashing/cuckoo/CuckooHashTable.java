@@ -3,22 +3,16 @@ package hashing.cuckoo;
 import java.util.Random;
 
 public class CuckooHashTable<T> {
-    // 表的最大负载（装填因子）
-    private static final double MAX_LOAD = 0.4;
-    // 指定插入冲突时我们最多能执行多少次再散列
-    private static final int ALLOWED_REHASHES = 1;
-    // 散列表初始化长度h
-    private static final int DEFAULT_TABLE_SIZE = 101;
+    private static final double MAX_LOAD = 0.4;         // 表的最大负载（装填因子）
+    private static final int ALLOWED_REHASHES = 1;      // 指定插入冲突时我们最多能执行多少次再散列
+    private static final int DEFAULT_TABLE_SIZE = 101;  // 散列表初始化长度h
 
-    // 散列函数集
-    private final HashFamily<? super T> hashFunctions;
-    // 散列函数的个数
-    private final int numHashFunctions;
+    private final HashFamily<? super T> hashFunctions;  // 散列函数集
+    private final int numHashFunctions;                 // 散列函数的个数
     private T[] array;
     private int currentSize;
 
-    // 跟踪已经为这次插入尝试了多少次再散列
-    private int rehashes = 0;
+    private int rehashes = 0;       // 跟踪已经为这次插入尝试了多少次再散列
     private Random r = new Random();
 
     /**
@@ -34,13 +28,10 @@ public class CuckooHashTable<T> {
      * @param size 散列表初始化长度
      */
     public CuckooHashTable(HashFamily<? super T> hf, int size) {
-        // 分配散列表大小
-        allocateArray(nextPrime(size));
+        allocateArray(nextPrime(size));                 // 分配散列表大小
         doClear();
-        // 实例化散列函数集接口
-        hashFunctions = hf;
-        // 散列函数个数
-        numHashFunctions = hf.getNumberOfFunctions();
+        hashFunctions = hf;                             // 实例化散列函数集接口
+        numHashFunctions = hf.getNumberOfFunctions();   // 散列函数个数
     }
 
     /**
@@ -158,8 +149,7 @@ public class CuckooHashTable<T> {
                 int i = 0;
                 do {
                     pos = myhash(x, r.nextInt(numHashFunctions));
-                    // 当前散列的位置与上一次相同超过五次时, 终止循环
-                } while(pos == lastPos && i++ < 5);
+                } while(pos == lastPos && i++ < 5); // 当前散列的位置与上一次相同超过五次时, 终止循环
 
                 T tmp = array[lastPos = pos];
                 array[pos] = x;
@@ -168,12 +158,10 @@ public class CuckooHashTable<T> {
 
 
             if(++rehashes > ALLOWED_REHASHES) {
-                // 使表更大
-                expand();
+                expand();   // 使表更大
                 rehashes = 0;
             } else {
-                // 同样的表长, 但使用新的hash函数
-                rehash();
+                rehash();   // 同样的表长, 但使用新的hash函数
             }
         }
     }
@@ -250,11 +238,10 @@ public class CuckooHashTable<T> {
      * @param n
      */
     private static int nextPrime( int n ) {
-        if( n % 2 == 0 )
+        if( n % 2 == 0 ) {
             n++;
-
-        // 从奇数中找到最近的一个素数
-        for( ; !isPrime( n ); n += 2 );
+        }
+        for( ; !isPrime( n ); n += 2 ); // 从奇数中找到最近的一个素数
 
         return n;
     }
@@ -263,17 +250,17 @@ public class CuckooHashTable<T> {
      * @param n
      */
     private static boolean isPrime( int n ) {
-        if( n == 2 || n == 3 )
+        if( n == 2 || n == 3 ) {
             return true;
-
-        if( n == 1 || n % 2 == 0 )
+        }
+        if( n == 1 || n % 2 == 0 ) {
             return false;
-
-        // 到sqrt(n)止
-        for( int i = 3; i * i <= n; i += 2 )
-            if( n % i == 0 )
+        }
+        for( int i = 3; i * i <= n; i += 2 ) {  // 到sqrt(n)止
+            if (n % i == 0) {
                 return false;
-
+            }
+        }
         return true;
     }
 }

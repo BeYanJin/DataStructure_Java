@@ -77,8 +77,7 @@ public class SkewHeap<T extends Comparable<? super T>> {
      * 合并两个堆
      */
     public void merge(SkewHeap<T> rhs) {
-        // 避免混叠问题
-        if(this == rhs) {
+        if(this == rhs) {   // 避免混叠问题
             return;
         }
 

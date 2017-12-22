@@ -23,6 +23,7 @@ public class Pow {
 
     /**
      * 判断数字是否为偶数
+     * @param n
      */
     private static boolean isEven(int n) {
         return ((n & 1) == 0);

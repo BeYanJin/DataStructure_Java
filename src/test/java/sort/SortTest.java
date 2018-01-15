@@ -159,4 +159,47 @@ public class SortTest {
         Sort.quickDescSort(array, 10, 19);
         Assert.assertArrayEquals(descResult02, array);
     }
+
+    @Test
+    public void testRadixSort() {
+        String[] strLen4_1 = {"term", "fast", "deal", "duty", "face", "chew", "chat",
+                            "mess", "obey", "race", "care", "exam", "rest", "deep",
+                            "burn", "knee", "pain", "hurt", "drop", "wind", "bark",
+                            "lift", "sink", "miss", "okay", "suit", "type", "risk",
+                            "main", "trek", "fall", "wine", "firm", "pack", "spot"};
+        String[] strLen4_2 = {"term", "fast", "deal", "duty", "face", "chew", "chat",
+                            "mess", "obey", "race", "care", "exam", "rest", "deep",
+                            "burn", "knee", "pain", "hurt", "drop", "wind", "bark",
+                            "lift", "sink", "miss", "okay", "suit", "type", "risk",
+                            "main", "trek", "fall", "wine", "firm", "pack", "spot"};
+        String[] strLen4_result = {"bark", "burn", "care", "chat", "chew", "deal", "deep",
+                                "drop", "duty", "exam", "face", "fall", "fast", "firm",
+                                "hurt", "knee", "lift", "main", "mess", "miss", "obey",
+                                "okay", "pack", "pain", "race", "rest", "risk", "sink",
+                                "spot", "suit", "term", "trek", "type", "wind", "wine"};
+
+        String[] strUnequalLen = {"disrupt", "splash", "adverse", "extinct", "priest", "marsh", "graze",
+                                "batch", "afflict", "zero", "incur", "cereal", "commute", "wedge",
+                                "diffuse", "lick", "dwell", "entity", "assert", "web", "amends", "flap",
+                                "heir", "insame", "veto", "asset", "mutter", "brittle", "naive", "offset",
+                                "perish", "ple", "prey", "toss", "ego", "virus", "concede", "yell",
+                                "brace", "acquisition", "configuration"};
+        String[] strUnequalLen_result = {"acquisition", "adverse", "afflict", "amends", "assert", "asset",
+                                        "batch", "brace", "brittle", "cereal", "commute", "concede", "configuration",
+                                        "diffuse", "disrupt", "dwell", "ego", "entity", "extinct", "flap", "graze",
+                                        "heir", "incur", "insame", "lick", "marsh", "mutter", "naive", "offset",
+                                        "perish", "ple", "prey", "priest", "splash", "toss", "veto", "virus", "web",
+                                        "wedge", "yell", "zero"};
+
+        // 定长字符串的基数排序（ArrayList的简单实现）
+        Sort.radixSortA(strLen4_1, strLen4_1[0].length());
+        // 定长字符串的计数基数排序
+        Sort.countingRadixSort(strLen4_2, strLen4_2[0].length());
+        // 变长字符串的基数排序
+        Sort.radixSort(strUnequalLen, 13);
+
+        Assert.assertArrayEquals(strLen4_result, strLen4_1);
+        Assert.assertArrayEquals(strLen4_result, strLen4_2);
+        Assert.assertArrayEquals(strUnequalLen, strUnequalLen_result);
+    }
 }

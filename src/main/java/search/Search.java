@@ -86,7 +86,7 @@ public class Search {
      * @param k
      * @return 返回数组中第k个最大元
      */
-    public static <T extends Comparable<? super T>> T quickMaxSelect(T[] a, int k) {
+    public static <T extends Comparable<? super T>> T  quickMaxSelect(T[] a, int k) {
         if(a == null) {
             throw new NullPointerException();
         }

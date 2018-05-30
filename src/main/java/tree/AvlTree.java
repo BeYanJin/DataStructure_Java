@@ -12,7 +12,7 @@ import java.util.Comparator;
  * 查找：O(logN)
  * 删除：O(logN)
  */
-public class AvlTree<T extends Comparable<? super T>> {
+public class AvlTree<T extends Comparable<? super T>> implements Tree<T> {
 	private AvlNode<T> root;	// 根节点
 	private Comparator<? super T> cmp;		// 自定义外部比较器
 	private static final int ALLOWED_IMBALANCE = 1;	// 最大允许左右子树的高度差

@@ -14,7 +14,7 @@ import java.util.Comparator;
  * 存在问题：交替插入和删除O(N^2)次，右沉的树将明显地不平衡
  * 解决方法；找到一种使树不管插入删除多少次都能保持平衡的算法
  */
-public class BinarySearchTree<T extends Comparable<? super T>> {
+public class BinarySearchTree<T extends Comparable<? super T>> implements Tree<T> {
 	private BinaryNode<T> root;			// 根节点
 	private Comparator<? super T> cmp;	// 自定义外部比较器
 	

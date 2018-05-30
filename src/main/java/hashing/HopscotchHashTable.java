@@ -4,7 +4,7 @@ package hashing;
  * 跳房子散列
  * @param <T>
  */
-public class HopscotchHashTable <T>{
+public class HopscotchHashTable<T> implements HashTable<T> {
     private HashItem<T>[] array;                          //散列表主体
     private static final int DEFAULT_TBALE_SIZE = 101;  //默认散列表大小
     private int currentSize;                            //元素个数
@@ -76,6 +76,21 @@ public class HopscotchHashTable <T>{
      */
     public int capacity( ) {
         return array.length;
+    }
+    /**
+     * 判断散列表是否为空（没有元素）
+     */
+    public boolean isEmpty() {
+        return currentSize == 0;
+    }
+    /**
+     * 清空hash表
+     */
+    public void makeEmpty() {
+        for(int i = 0; i < array.length; i++) {
+            array[i] = new HashItem<T>(null);
+        }
+        currentSize = 0;
     }
     /**
      * 判断存在性

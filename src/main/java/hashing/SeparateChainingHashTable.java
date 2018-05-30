@@ -3,7 +3,7 @@ package hashing;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SeparateChainingHashTable<T> {
+public class SeparateChainingHashTable<T> implements HashTable<T> {
     private static final int DEFAULT_TABLE_SIZE = 10;   // 散列表的大小, 该值最好为素数
     private List<T>[] theLists;     // 链表数组, 数组下标为散列表的关键字 Key
     private int currentSize;        // 节点总个数
@@ -32,6 +32,19 @@ public class SeparateChainingHashTable<T> {
      */
     public int size() {
         return currentSize;
+    }
+    /**
+     * 获取当前散列表的长度
+     * @return 当前散列表的长度
+     */
+    public int capacity( ) {
+        return theLists.length;
+    }
+    /**
+     * 判断散列表是否为空（没有元素）
+     */
+    public boolean isEmpty() {
+        return currentSize == 0;
     }
     /**
      * 清空hash表

@@ -1,6 +1,6 @@
 package hashing;
 
-public class QuadraticProbingHashTable<T> {
+public class QuadraticProbingHashTable<T> implements HashTable<T> {
 
     private static final int DEFAULT_TABLE_SIZE = 11;
     private HashEntry<T>[] array;
@@ -34,6 +34,12 @@ public class QuadraticProbingHashTable<T> {
      */
     public int capacity( ) {
         return array.length;
+    }
+    /**
+     * 判断散列表是否为空（没有元素）
+     */
+    public boolean isEmpty() {
+        return currentSize == 0;
     }
     /**
      * 清空hash表
